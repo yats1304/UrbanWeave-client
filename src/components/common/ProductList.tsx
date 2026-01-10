@@ -5,7 +5,6 @@ import Link from "next/link";
 import Filter from "./Filter";
 
 // TEMPORARY DUMMY PRODUCTS DATA
-
 const products: ProductsType = [
   {
     id: 1,
