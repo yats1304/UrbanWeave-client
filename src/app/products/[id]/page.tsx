@@ -19,10 +19,10 @@ const product: ProductType = {
   },
 };
 
-export const generateMetaData = async ({
+export const generateMetadata = async ({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) => {
   // TODO: Get product from DB
 
