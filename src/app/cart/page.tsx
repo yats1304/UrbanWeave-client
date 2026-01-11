@@ -2,7 +2,7 @@
 
 import PaymentForm from "@/components/common/PaymentForm";
 import ShippingForm from "@/components/common/ShippingForm";
-import { CartItemsType } from "@/types/types";
+import { CartItemsType, shippingFormInputs } from "@/types/types";
 import { ArrowRight, Trash2 } from "lucide-react";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -100,7 +100,9 @@ const cartItems: CartItemsType = [
 const CartPage = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const [shippingForm, setShippingForm] = useState(null);
+  const [shippingForm, setShippingForm] = useState<shippingFormInputs | null>(
+    null
+  );
 
   const activeStep = parseInt(searchParams.get("step") || "1");
   return (
@@ -136,7 +138,7 @@ const CartPage = () => {
       {/* Steps and Details */}
       <div className="w-full flex flex-col lg:flex-row gap-16">
         {/* Steps */}
-        <div className="w-full lg:7/12 shadow-lg border-1 border-gray-100 p-8 rounded-lg flex flex-col gap-8">
+        <div className="w-full lg:7/12 shadow-lg border border-gray-100 p-8 rounded-lg flex flex-col gap-8">
           {activeStep === 1 ? (
             cartItems.map((item) => (
               // Single cart item
@@ -176,7 +178,7 @@ const CartPage = () => {
               </div>
             ))
           ) : activeStep === 2 ? (
-            <ShippingForm />
+            <ShippingForm setShippingForm={setShippingForm} />
           ) : activeStep === 3 && shippingForm ? (
             <PaymentForm />
           ) : (
@@ -186,7 +188,7 @@ const CartPage = () => {
           )}
         </div>
         {/* Details */}
-        <div className="w-full h-max lg:5/12 shadow-lg border-1 border-gray-100 p-8 rounded-lg flex flex-col gap-8">
+        <div className="w-full h-max lg:5/12 shadow-lg border border-gray-100 p-8 rounded-lg flex flex-col gap-8">
           <h2 className="font-semibold">Cart Details</h2>
           <div className="flex flex-col gap-4">
             <div className="flex justify-between text-sm">
